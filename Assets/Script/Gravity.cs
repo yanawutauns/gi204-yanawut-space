@@ -4,10 +4,11 @@ using System.Collections.Generic;
 public class Gravity : MonoBehaviour
 {
     Rigidbody rb;
-    const float G = 0.00667f;
+    const float G = 0.0667f;
     public static List<Gravity> gbList;
 
-
+    [SerializeField] bool planet = false;
+    [SerializeField]int orbitSpeed = 1000;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -16,6 +17,11 @@ public class Gravity : MonoBehaviour
             gbList = new List<Gravity>();
         }
         gbList.Add(this);
+
+        if (planet)
+        {
+            rb.AddForce(Vector3.left * orbitSpeed);
+        }
     }
 
     private void FixedUpdate()
